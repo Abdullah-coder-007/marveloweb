@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+for(const [i,m] of scripts.entries()) new vm.Script(m[1],{filename:`inline-${i+1}.js`});
+const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+if(new Set(ids).size!==ids.length) throw Error('Duplicate HTML IDs');
+for(const [,id] of html.matchAll(/href="#([^"]+)"/g)) if(!ids.includes(id)) throw Error(`Missing anchor: ${id}`);
+for(const [,asset] of html.matchAll(/(?:src|href)="(assets\/[^"]+)"/g)) if(!fs.existsSync(path.join(root,asset))) throw Error(`Missing asset: ${asset}`);
+if(!fs.existsSync(path.join(root,'assets/industry-grid.png'))) throw Error('Missing business category image');
+if(!html.includes('render();schedule()},2000)')) throw Error('Hero timing must remain 2 seconds');
+console.log(`Validated ${scripts.length} scripts, ${ids.length} unique IDs, section anchors, local images, and hero timing.`);
