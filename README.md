@@ -17,6 +17,9 @@ Then open http://localhost:8080.
 - `index.html`: complete page markup, styles, and interactive behaviors.
 - `assets/kromaloom-logo.png`: supplied brand logo.
 - `assets/industry-grid.png`: generated photographic business-category backgrounds.
+- `assets/redesign.css`: responsive dark and mint design system, with DM Sans typography and editorial spacing inspired by the supplied ThunderClap reference.
+- `assets/motion.js`: progressive scroll reveals and staggered card entrances, respecting reduced-motion preferences.
+- `assets/dm-sans-latin.woff2`: self-hosted DM Sans variable font; license in `assets/DM-Sans-OFL.txt`.
 - `scripts/check.mjs`: JavaScript syntax, local asset, ID, and anchor checks.
 - `.nojekyll`: publish the static files directly with GitHub Pages.
 

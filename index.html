@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0f1518">
 <meta name="description" content="Thoughtful website redesigns for businesses ready for their next chapter.">
 <title>Kromaloom — A better website. A bigger possibility.</title>
 <style>
@@ -148,19 +148,23 @@ dialog{background:#fff;color:#142238;border-color:#d9e5f7}.dialog-close{color:#6
 @media(max-width:760px){.destination{padding:0 18px}.site-header{height:auto;min-height:100px}.hero{height:auto;max-height:none;min-height:0;border-radius:17px}.hero-copy{padding:33px 25px}.hero h1{font-size:clamp(40px,9vw,63px)}.showcase{border-top-color:#e6edf7}.site-footer{margin:0 -18px;padding:32px 22px 24px}.team-section{grid-template-columns:1fr;gap:22px;padding:22px}.team-guarantee{grid-column:auto}.contact-proposal{padding:25px 20px}.result-stat:nth-child(3),.result-action{border-top-color:#ffffff13}}
 
 </style>
+<link rel="preload" href="assets/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/redesign.css">
 </head>
 <body>
 
 <main class="destination" id="home" aria-label="Kromaloom homepage" aria-hidden="true" inert>
  <header class="site-header">
   <a class="brand" href="#home" aria-label="Kromaloom home"><img src="assets/kromaloom-logo.png" width="172" height="43" alt="Kromaloom"></a>
-  <nav class="nav" aria-label="Main navigation"><button data-panel="why">Why redesign</button><button data-panel="how">how it works</button><button data-panel="pricing">Pricing</button><button data-panel="work">ourwork</button><button data-panel="faq">FAQ</button></nav>
+  <nav class="nav" aria-label="Main navigation"><a href="#benefit-heading">Why redesign</a><a href="#launch-process">how it works</a><a href="#pricing">Pricing</a><a href="#theme-showcase">ourwork</a><a href="#faq">FAQ</a></nav>
   <button class="account" data-panel="account">LOGIN/SignUP <span aria-hidden="true">↗</span></button>
  </header>
  <section class="hero" aria-labelledby="hero-title">
-  <div class="hero-copy">
+  <div class="hero-heading">
    <div class="eyebrow">Your next chapter starts here</div>
-   <h1 id="hero-title">Same business.<br>A whole new<br><em>first impression.</em></h1>
+   <h1 id="hero-title">Same business. <br class="hero-break">A whole new<br><em>first impression.</em></h1>
+  </div>
+  <div class="hero-copy">
    <p class="intro">You’ve built a business worth noticing. We redesign your website to reflect it—with thoughtful design, a clearer story, and an experience that turns visitors into possibilities.</p>
    <form class="website-form" id="website-form" novalidate>
     <div class="input-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><label class="sr-only" for="website">Your business website</label><input id="website" name="website" placeholder="yourbusiness.com" inputmode="url" autocomplete="url" spellcheck="false" aria-describedby="form-note" required></div>
@@ -263,7 +267,7 @@ account:['Your workspace, coming next.', '<p>Login and signup are part of the pl
 function openPanel(title,html){document.getElementById('modal-title').textContent=title;document.getElementById('modal-copy').innerHTML=html;dialog.showModal();const focusButton=document.getElementById('focus-website');if(focusButton)focusButton.onclick=()=>{dialog.close();document.getElementById('website').focus()}}
 document.querySelectorAll('[data-panel]').forEach(b=>b.onclick=()=>openPanel(...panels[b.dataset.panel]));document.querySelector('.dialog-close').onclick=()=>dialog.close();dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});
 document.getElementById('website-form').addEventListener('submit',e=>{e.preventDefault();const input=document.getElementById('website'),note=document.getElementById('form-note');let url;try{const raw=input.value.trim();url=new URL(/^[a-z]+:\/\//i.test(raw)?raw:'https://'+raw);if(!['http:','https:'].includes(url.protocol)||!url.hostname.includes('.')||url.hostname.includes(' ')||url.username||url.password||!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(url.hostname))throw Error();}catch{note.textContent='Enter a valid website address, such as yourbusiness.com.';note.classList.add('error');input.setAttribute('aria-invalid','true');input.focus();return;}note.classList.remove('error');input.removeAttribute('aria-invalid');note.textContent='Website address validated. No live audit has been run.';openPanel('Let’s look at your next chapter.', '<p>Your website address:</p><p><strong id="checked-domain"></strong></p><p>The address format is valid. This preview does not fetch or analyze your website yet. The next step is connecting the website review service.</p>');document.getElementById('checked-domain').textContent=url.hostname;});
-document.getElementById('year').textContent=new Date().getFullYear();
+const year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();
 })();
 </script>
 
@@ -315,5 +319,6 @@ document.querySelectorAll('.faq-question').forEach(button=>button.addEventListen
 <script>
 document.querySelectorAll('.footer-resource').forEach(button=>button.addEventListener('click',()=>{const dialog=document.getElementById('info-dialog');document.getElementById('modal-title').textContent=button.dataset.resource;document.getElementById('modal-copy').textContent='This resource is not available in the current preview. You can contact Kromaloom through the proposal form.';dialog.showModal();}));
 </script>
+<script src="assets/motion.js"></script>
 </body>
 </html>
